@@ -17,7 +17,7 @@ public interface Input {
         public int pointer;
     }
 
-    public boolean isTOuchDown(int pointer);
+    public boolean isTouchDown(int pointer);
     public int getTouchX(int pointer);
     public int getTouchY(int pointer);
     public List<TouchEvent> getTouchEvents();
