@@ -1,4 +1,4 @@
-package com.little_rocketeers.android_game_framework.implementation;
+package com.little_rocketeers.game_framework.implementation;
 
 /**
  * Created by Melanie on 03.07.2016.
@@ -12,7 +12,7 @@ import android.media.MediaPlayer.OnPreparedListener;
 import android.media.MediaPlayer.OnSeekCompleteListener;
 import android.media.MediaPlayer.OnVideoSizeChangedListener;
 
-import com.little_rocketeers.android_game_framework.Music;
+import com.little_rocketeers.game_framework.Music;
 
 public class AndroidMusic implements Music, OnCompletionListener, OnSeekCompleteListener, OnPreparedListener, OnVideoSizeChangedListener {
     MediaPlayer mediaPlayer;

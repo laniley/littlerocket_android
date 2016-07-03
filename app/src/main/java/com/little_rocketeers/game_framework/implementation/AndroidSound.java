@@ -1,11 +1,11 @@
-package com.little_rocketeers.android_game_framework.implementation;
+package com.little_rocketeers.game_framework.implementation;
 
 /**
  * Created by Melanie on 03.07.2016.
  */
 import android.media.SoundPool;
 
-import com.little_rocketeers.android_game_framework.Sound;
+import com.little_rocketeers.game_framework.Sound;
 
 public class AndroidSound implements Sound {
     int soundId;

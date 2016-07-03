@@ -1,4 +1,4 @@
-package com.little_rocketeers.android_game_framework.implementation;
+package com.little_rocketeers.game_framework.implementation;
 
 /**
  * Created by Melanie on 03.07.2016.
@@ -7,7 +7,7 @@ import java.util.List;
 
 import android.view.View.OnTouchListener;
 
-import com.little_rocketeers.android_game_framework.Input.TouchEvent;
+import com.little_rocketeers.game_framework.Input.TouchEvent;
 
 public interface TouchHandler extends OnTouchListener {
     public boolean isTouchDown(int pointer);

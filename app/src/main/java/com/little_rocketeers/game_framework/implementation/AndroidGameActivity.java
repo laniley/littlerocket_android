@@ -1,4 +1,4 @@
-package com.little_rocketeers.android_game_framework.implementation;
+package com.little_rocketeers.game_framework.implementation;
 
 /**
  * Created by Melanie on 03.07.2016.
@@ -14,14 +14,14 @@ import android.os.PowerManager.WakeLock;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.little_rocketeers.android_game_framework.Audio;
-import com.little_rocketeers.android_game_framework.FileIO;
-import com.little_rocketeers.android_game_framework.Game;
-import com.little_rocketeers.android_game_framework.Graphics;
-import com.little_rocketeers.android_game_framework.Input;
-import com.little_rocketeers.android_game_framework.Screen;
+import com.little_rocketeers.game_framework.Audio;
+import com.little_rocketeers.game_framework.FileIO;
+import com.little_rocketeers.game_framework.Game;
+import com.little_rocketeers.game_framework.Graphics;
+import com.little_rocketeers.game_framework.Input;
+import com.little_rocketeers.game_framework.Screen;
 
-public abstract class AndroidGame extends Activity implements Game {
+public abstract class AndroidGameActivity extends Activity implements Game {
     AndroidFastRenderView renderView;
     Graphics graphics;
     Audio audio;
@@ -35,7 +35,7 @@ public abstract class AndroidGame extends Activity implements Game {
         super.onCreate(savedInstanceState);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         boolean isPortrait = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
         int frameBufferWidth = isPortrait ? 800 : 1280;

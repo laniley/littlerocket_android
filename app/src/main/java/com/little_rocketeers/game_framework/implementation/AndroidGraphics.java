@@ -1,4 +1,4 @@
-package com.little_rocketeers.android_game_framework.implementation;
+package com.little_rocketeers.game_framework.implementation;
 
 /**
  * Created by Melanie on 03.07.2016.
@@ -16,8 +16,8 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
 
-import com.little_rocketeers.android_game_framework.Graphics;
-import com.little_rocketeers.android_game_framework.Image;
+import com.little_rocketeers.game_framework.Graphics;
+import com.little_rocketeers.game_framework.Image;
 
 public class AndroidGraphics implements Graphics {
     AssetManager assets;

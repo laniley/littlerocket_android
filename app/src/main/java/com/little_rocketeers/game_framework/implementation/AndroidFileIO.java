@@ -1,4 +1,4 @@
-package com.little_rocketeers.android_game_framework.implementation;
+package com.little_rocketeers.game_framework.implementation;
 
 /**
  * Created by Melanie on 03.07.2016.
@@ -16,7 +16,7 @@ import android.content.res.AssetManager;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 
-import com.little_rocketeers.android_game_framework.FileIO;
+import com.little_rocketeers.game_framework.FileIO;
 
 public class AndroidFileIO implements FileIO{
     Context context;

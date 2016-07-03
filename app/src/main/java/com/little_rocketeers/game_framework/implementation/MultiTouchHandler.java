@@ -1,4 +1,4 @@
-package com.little_rocketeers.android_game_framework.implementation;
+package com.little_rocketeers.game_framework.implementation;
 
 /**
  * Created by Melanie on 03.07.2016.
@@ -9,9 +9,9 @@ import java.util.List;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.little_rocketeers.android_game_framework.Pool;
-import com.little_rocketeers.android_game_framework.Input.TouchEvent;
-import com.little_rocketeers.android_game_framework.Pool.PoolObjectFactory;
+import com.little_rocketeers.game_framework.Pool;
+import com.little_rocketeers.game_framework.Input.TouchEvent;
+import com.little_rocketeers.game_framework.Pool.PoolObjectFactory;
 
 public class MultiTouchHandler implements TouchHandler {
     private static final int MAX_TOUCHPOINTS = 10;
