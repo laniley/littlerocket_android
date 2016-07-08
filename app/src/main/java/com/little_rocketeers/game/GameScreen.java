@@ -5,6 +5,7 @@ package com.little_rocketeers.game;
  */
 import java.util.List;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
 
@@ -19,6 +20,7 @@ public class GameScreen extends Screen {
     }
 
     GameState state = GameState.Ready;
+    Context context;
 
     // Variable Setup
     // You would create game objects here.
@@ -136,7 +138,7 @@ public class GameScreen extends Screen {
                 if (event.x > 300 && event.x < 980 && event.y > 100
                         && event.y < 500) {
                     nullify();
-                    game.setScreen(new MainMenuScreen(game));
+                    game.setScreen(new MainMenuScreen(game, context));
                     return;
                 }
             }

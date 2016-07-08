@@ -23,17 +23,12 @@ public class LoadingScreen extends Screen {
 
     @Override
     public void update(float deltaTime) {
-       // Graphics g = game.getGraphics();
-        //Assets.click = game.getAudio().createSound("explode.ogg");
+        Graphics g = game.getGraphics();
 
-        //if(this.isPortrait()) {
-           // Assets.menu = g.newImage("loading_1280x800.png", ImageFormat.RGB565);
-        //}
-        //else {
-           // Assets.menu = g.newImage("loading_800x1280.png", ImageFormat.RGB565);
-        //}
+        Assets.menuLandscape = g.newImage("menu_1280x800.png", ImageFormat.RGB565);
+        Assets.menuPortrait = g.newImage("menu_800x1280.png", ImageFormat.RGB565);
 
-       // game.setScreen(new MainMenuScreen(game));
+        game.setScreen(new MainMenuScreen(game, context));
     }
 
 

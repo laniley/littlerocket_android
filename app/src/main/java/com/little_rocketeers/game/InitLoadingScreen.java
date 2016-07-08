@@ -4,7 +4,6 @@ package com.little_rocketeers.game;
  * Created by Melanie on 03.07.2016.
  */
 import android.content.Context;
-import android.content.res.Configuration;
 
 import com.little_rocketeers.game_framework.Game;
 import com.little_rocketeers.game_framework.Graphics;
@@ -54,9 +53,5 @@ public class InitLoadingScreen extends Screen {
     @Override
     public void backButton() {
 
-    }
-
-    private boolean isPortrait() {
-        return this.context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
     }
 }
