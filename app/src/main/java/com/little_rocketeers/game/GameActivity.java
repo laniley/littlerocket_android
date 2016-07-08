@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import android.content.res.Configuration;
 import android.util.Log;
 
 import com.little_rocketeers.game_framework.Screen;
@@ -25,7 +26,7 @@ public class GameActivity extends AndroidGameActivity {
             firstTimeCreate = false;
         }
 
-        return new InitLoadingScreen(this);
+        return new InitLoadingScreen(this, this.getApplicationContext());
     }
 
     @Override
@@ -36,16 +37,12 @@ public class GameActivity extends AndroidGameActivity {
     @Override
     public void onResume() {
         super.onResume();
-
-        Assets.theme.play();
-
+        //Assets.themeMusic.play();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        Assets.theme.pause();
-
+        //Assets.themeMusic.pause();
     }
-
 }

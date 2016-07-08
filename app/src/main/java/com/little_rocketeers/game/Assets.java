@@ -10,17 +10,17 @@ import com.little_rocketeers.game_framework.Music;
 import com.little_rocketeers.game_framework.Sound;
 
 public class Assets {
-    public static Image menu, initloading;
+    public static Image menu, loadingPortrait, loadingLandscape;
     public static Sound click;
-    public static Music theme;
+    public static Music themeMusic;
 
     //private static MediaPlayer mpintro;
 
     public static void load(GameActivity game) {
         // TODO Auto-generated method stub
-        theme = game.getAudio().createMusic("maintheme.mp3");
-        theme.setLooping(true);
-        theme.setVolume(0.85f);
+        themeMusic = game.getAudio().createMusic("maintheme.mp3");
+        themeMusic.setLooping(true);
+        themeMusic.setVolume(0.85f);
         //theme.play();
     }
 }
