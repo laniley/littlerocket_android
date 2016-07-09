@@ -138,7 +138,7 @@ public class GameScreen extends Screen {
                 if (event.x > 300 && event.x < 980 && event.y > 100
                         && event.y < 500) {
                     nullify();
-                    game.setScreen(new MainMenuScreen(game, context));
+                    game.setScreen(new MainMenuScreen(game));
                     return;
                 }
             }

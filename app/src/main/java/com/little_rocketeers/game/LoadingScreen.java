@@ -13,11 +13,9 @@ import com.little_rocketeers.game_framework.Screen;
 
 public class LoadingScreen extends Screen {
 
-    Context context;
 
-    public LoadingScreen(Game game, Context context) {
+    public LoadingScreen(Game game) {
         super(game);
-        this.context = context;
     }
 
 
@@ -25,10 +23,9 @@ public class LoadingScreen extends Screen {
     public void update(float deltaTime) {
         Graphics g = game.getGraphics();
 
-        Assets.menuLandscape = g.newImage("menu_1280x800.png", ImageFormat.RGB565);
-        Assets.menuPortrait = g.newImage("menu_800x1280.png", ImageFormat.RGB565);
+        Assets.menu = g.newImage("menu_800x1280.png", ImageFormat.RGB565);
 
-        game.setScreen(new MainMenuScreen(game, context));
+        game.setScreen(new MainMenuScreen(game));
     }
 
 
@@ -36,13 +33,8 @@ public class LoadingScreen extends Screen {
     public void paint(float deltaTime) {
 
         Graphics g = game.getGraphics();
+        g.drawImage(Assets.loading, 0, 0);
 
-        if(this.isPortrait()) {
-            g.drawImage(Assets.loadingPortrait, 0, 0);
-        }
-        else {
-            g.drawImage(Assets.loadingLandscape, 0, 0);
-        }
     }
 
 
@@ -55,14 +47,6 @@ public class LoadingScreen extends Screen {
 
     @Override
     public void resume() {
-        Graphics g = game.getGraphics();
-
-        if(this.isPortrait()) {
-            g.drawImage(Assets.loadingPortrait, 0, 0);
-        }
-        else {
-            g.drawImage(Assets.loadingLandscape, 0, 0);
-        }
 
     }
 
@@ -78,9 +62,5 @@ public class LoadingScreen extends Screen {
     public void backButton() {
 
 
-    }
-
-    private boolean isPortrait() {
-        return this.context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
     }
 }

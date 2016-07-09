@@ -15,11 +15,8 @@ import com.little_rocketeers.game_framework.Input.TouchEvent;
 
 public class MainMenuScreen extends Screen {
 
-    Context context;
-
-    public MainMenuScreen(Game game, Context context) {
+    public MainMenuScreen(Game game) {
         super(game);
-        this.context = context;
     }
 
 
@@ -33,14 +30,10 @@ public class MainMenuScreen extends Screen {
         for (int i = 0; i < len; i++) {
             TouchEvent event = touchEvents.get(i);
             if (event.type == TouchEvent.TOUCH_UP) {
-
-
-                if (inBounds(event, 0, 0, 250, 250)) {
+                if (inBounds(event, 186, 557, 425, 165)) {
                     //START GAME
                     game.setScreen(new GameScreen(game));
                 }
-
-
             }
         }
     }
@@ -59,12 +52,7 @@ public class MainMenuScreen extends Screen {
     @Override
     public void paint(float deltaTime) {
         Graphics g = game.getGraphics();
-        if(this.isPortrait()) {
-            g.drawImage(Assets.menuPortrait, 0, 0);
-        }
-        else {
-            g.drawImage(Assets.menuLandscape, 0, 0);
-        }
+        g.drawImage(Assets.menu, 0, 0);
     }
 
 
@@ -75,13 +63,7 @@ public class MainMenuScreen extends Screen {
 
     @Override
     public void resume() {
-        Graphics g = game.getGraphics();
-        if(this.isPortrait()) {
-            g.drawImage(Assets.menuPortrait, 0, 0);
-        }
-        else {
-            g.drawImage(Assets.menuLandscape, 0, 0);
-        }
+
     }
 
 
@@ -97,9 +79,5 @@ public class MainMenuScreen extends Screen {
         //Display "Exit GameActivityActivity?" Box
 
 
-    }
-
-    private boolean isPortrait() {
-        return this.context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
     }
 }
