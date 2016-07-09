@@ -11,6 +11,7 @@ import android.graphics.Paint;
 
 import com.little_rocketeers.game_framework.Game;
 import com.little_rocketeers.game_framework.Graphics;
+import com.little_rocketeers.game_framework.Image;
 import com.little_rocketeers.game_framework.Screen;
 import com.little_rocketeers.game_framework.Input.TouchEvent;
 
@@ -20,7 +21,10 @@ public class GameScreen extends Screen {
     }
 
     GameState state = GameState.Ready;
-    Context context;
+
+    private static Background bg1, bg2;
+
+    private Image rocket;
 
     // Variable Setup
     // You would create game objects here.
@@ -32,6 +36,10 @@ public class GameScreen extends Screen {
         super(game);
 
         // Initialize game objects here
+        bg1 = new Background(0, 0);
+        bg2 = new Background(0, -1280);
+
+        rocket = Assets.rocket;
 
         // Defining a paint object
         paint = new Paint();
@@ -46,10 +54,7 @@ public class GameScreen extends Screen {
     public void update(float deltaTime) {
         List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
 
-        // We have four separate update methods in this example.
-        // Depending on the state of the game, we call different update methods.
-        // Refer to Unit 3's code. We did a similar thing without separating the
-        // update methods.
+        // Depending on the state of the game, we call a different update methods.
 
         if (state == GameState.Ready)
             updateReady(touchEvents);
@@ -68,18 +73,20 @@ public class GameScreen extends Screen {
         // state now becomes GameState.Running.
         // Now the updateRunning() method will be called!
 
-        if (touchEvents.size() > 0)
+        if (touchEvents.size() > 0) {
+            bg1.setSpeed(10);
+            bg2.setSpeed(10);
             state = GameState.Running;
+        }
     }
 
     private void updateRunning(List<TouchEvent> touchEvents, float deltaTime) {
-
-        //This is identical to the update() method from our Unit 2/3 game.
-
-
+       // Assets.themeMusic.play();
         // 1. All touch input is handled here:
         int len = touchEvents.size();
+
         for (int i = 0; i < len; i++) {
+
             TouchEvent event = touchEvents.get(i);
 
             if (event.type == TouchEvent.TOUCH_DOWN) {
@@ -94,17 +101,16 @@ public class GameScreen extends Screen {
 
             }
 
+
+
             if (event.type == TouchEvent.TOUCH_UP) {
 
                 if (event.x < 640) {
                     // Stop moving left.
-                }
-
-                else if (event.x > 640) {
+                } else if (event.x > 640) {
                     // Stop moving right. }
                 }
             }
-
 
         }
 
@@ -114,10 +120,8 @@ public class GameScreen extends Screen {
             state = GameState.GameOver;
         }
 
-
-        // 3. Call individual update() methods here.
-        // This is where all the game updates happen.
-        // For example, robot.update();
+        bg1.update();
+        bg2.update();
     }
 
     private void updatePaused(List<TouchEvent> touchEvents) {
@@ -151,9 +155,8 @@ public class GameScreen extends Screen {
         Graphics g = game.getGraphics();
 
         // First draw the game elements.
-
-        // Example:
-        // g.drawImage(Assets.background, 0, 0);
+        g.drawImage(Assets.background, bg1.getBgX(), bg1.getBgY());
+        g.drawImage(Assets.background, bg2.getBgX(), bg2.getBgY());
         // g.drawImage(Assets.character, characterX, characterY);
 
         // Secondly, draw the UI above the game elements.
@@ -182,8 +185,7 @@ public class GameScreen extends Screen {
         Graphics g = game.getGraphics();
 
         g.drawARGB(155, 0, 0, 0);
-        g.drawString("Tap each side of the screen to move in that direction.",
-                640, 300, paint);
+        g.drawImage(Assets.start_menu, 0, 0);
 
     }
 
@@ -196,6 +198,7 @@ public class GameScreen extends Screen {
         Graphics g = game.getGraphics();
         // Darken the entire screen so you can display the Paused screen.
         g.drawARGB(155, 0, 0, 0);
+        g.drawImage(Assets.start_menu, 0, 0);
 
     }
 
@@ -225,6 +228,7 @@ public class GameScreen extends Screen {
 
     @Override
     public void backButton() {
-        pause();
+        //pause();
+        game.setScreen(new MainMenuScreen(game));
     }
 }

@@ -5,6 +5,8 @@ package com.little_rocketeers.game;
  */
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.Paint;
 
 import java.util.List;
 
@@ -15,8 +17,19 @@ import com.little_rocketeers.game_framework.Input.TouchEvent;
 
 public class MainMenuScreen extends Screen {
 
+    private static Background bg;
+    Paint paint;
+
     public MainMenuScreen(Game game) {
         super(game);
+
+        bg = new Background(0, 0);
+
+        paint = new Paint();
+        paint.setTextSize(60);
+        paint.setTextAlign(Paint.Align.CENTER);
+        paint.setAntiAlias(true);
+        paint.setColor(Color.parseColor("#303637"));
     }
 
 
@@ -52,7 +65,9 @@ public class MainMenuScreen extends Screen {
     @Override
     public void paint(float deltaTime) {
         Graphics g = game.getGraphics();
-        g.drawImage(Assets.menu, 0, 0);
+        g.drawImage(Assets.background, 0,0);
+        g.drawImage(Assets.button, (800/2) - (430/2), (1280/2) - (165/2));
+        g.drawString("START", (800/2), (int)((1280/2) - ((paint.descent() + paint.ascent()) / 2)), paint);
     }
 
 
@@ -76,8 +91,7 @@ public class MainMenuScreen extends Screen {
 
     @Override
     public void backButton() {
-        //Display "Exit GameActivityActivity?" Box
-
-
+        // leave the game
+        android.os.Process.killProcess(android.os.Process.myPid());
     }
 }

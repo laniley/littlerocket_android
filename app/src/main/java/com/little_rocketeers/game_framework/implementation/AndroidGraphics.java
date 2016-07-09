@@ -107,8 +107,6 @@ public class AndroidGraphics implements Graphics {
     @Override
     public void drawString(String text, int x, int y, Paint paint){
         canvas.drawText(text, x, y, paint);
-
-
     }
 
 
