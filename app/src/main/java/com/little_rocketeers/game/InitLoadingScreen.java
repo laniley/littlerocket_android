@@ -12,8 +12,11 @@ import com.little_rocketeers.game_framework.Screen;
 
 public class InitLoadingScreen extends Screen {
 
-    public InitLoadingScreen(Game game) {
+    private Context context;
+
+    public InitLoadingScreen(Game game, Context context) {
         super(game);
+        this.context = context;
     }
 
     @Override
@@ -21,7 +24,7 @@ public class InitLoadingScreen extends Screen {
         Graphics g = game.getGraphics();
         Assets.loading = g.newImage("loading_800x1280.png", ImageFormat.RGB565);
 
-        game.setScreen(new LoadingScreen(game));
+        game.setScreen(new LoadingScreen(game, context));
     }
 
     @Override

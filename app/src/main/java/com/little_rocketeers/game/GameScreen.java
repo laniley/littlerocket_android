@@ -8,6 +8,7 @@ import java.util.List;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 
 import com.little_rocketeers.game_framework.Game;
 import com.little_rocketeers.game_framework.Graphics;
@@ -16,6 +17,9 @@ import com.little_rocketeers.game_framework.Screen;
 import com.little_rocketeers.game_framework.Input.TouchEvent;
 
 public class GameScreen extends Screen {
+
+    Context context;
+
     enum GameState {
         Ready, Running, Paused, GameOver
     }
@@ -30,10 +34,12 @@ public class GameScreen extends Screen {
     // You would create game objects here.
 
     int livesLeft = 1;
+    Typeface myTypeface;
     Paint paint;
 
-    public GameScreen(Game game) {
+    public GameScreen(Game game, Context context) {
         super(game);
+        this.context = context;
 
         // Initialize game objects here
         bg1 = new Background(0, 0);
@@ -41,12 +47,15 @@ public class GameScreen extends Screen {
 
         rocket = Assets.rocket;
 
+        myTypeface = Typeface.createFromAsset(context.getAssets(), "fonts/kraash_black.ttf");
+
         // Defining a paint object
         paint = new Paint();
-        paint.setTextSize(30);
+        paint.setTextSize(45);
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setAntiAlias(true);
-        paint.setColor(Color.WHITE);
+        paint.setColor(Color.parseColor("#303637"));
+        paint.setTypeface(myTypeface);
 
     }
 
@@ -185,7 +194,9 @@ public class GameScreen extends Screen {
         Graphics g = game.getGraphics();
 
         g.drawARGB(155, 0, 0, 0);
-        g.drawImage(Assets.start_menu, 0, 0);
+
+        g.drawImage(Assets.button, (800/2) - (430/2), (1280/2) - (165/2));
+        g.drawString("START", (800/2), (int)((1280/2) - ((paint.descent() + paint.ascent()) / 2) + 10), paint);
 
     }
 
@@ -198,7 +209,9 @@ public class GameScreen extends Screen {
         Graphics g = game.getGraphics();
         // Darken the entire screen so you can display the Paused screen.
         g.drawARGB(155, 0, 0, 0);
-        g.drawImage(Assets.start_menu, 0, 0);
+
+        g.drawImage(Assets.button, (800/2) - (430/2), (1280/2) - (165/2));
+        g.drawString("START", (800/2), (int)((1280/2) - ((paint.descent() + paint.ascent()) / 2) + 10), paint);
 
     }
 
@@ -229,6 +242,6 @@ public class GameScreen extends Screen {
     @Override
     public void backButton() {
         //pause();
-        game.setScreen(new MainMenuScreen(game));
+        game.setScreen(new MainMenuScreen(game, context));
     }
 }

@@ -12,7 +12,6 @@ import com.little_rocketeers.game_framework.Sound;
 public class Assets {
     public static Image
             loading,
-            start_menu,
             background,
             button,
             rocket;

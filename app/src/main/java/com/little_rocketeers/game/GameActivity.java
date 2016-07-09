@@ -26,7 +26,7 @@ public class GameActivity extends AndroidGameActivity {
             firstTimeCreate = false;
         }
 
-        return new InitLoadingScreen(this);
+        return new InitLoadingScreen(this, getApplicationContext());
     }
 
     @Override
