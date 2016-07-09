@@ -16,7 +16,7 @@ public class Background {
         bgY += speed;
 
         if (bgY >= 1280){
-            bgY = 0;
+            bgY = -1280;
         }
     }
 

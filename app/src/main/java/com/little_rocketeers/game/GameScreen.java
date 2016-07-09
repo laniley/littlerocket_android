@@ -83,8 +83,8 @@ public class GameScreen extends Screen {
         // Now the updateRunning() method will be called!
 
         if (touchEvents.size() > 0) {
-            bg1.setSpeed(10);
-            bg2.setSpeed(10);
+            bg1.setSpeed(20);
+            bg2.setSpeed(20);
             state = GameState.Running;
         }
     }
@@ -151,7 +151,7 @@ public class GameScreen extends Screen {
                 if (event.x > 300 && event.x < 980 && event.y > 100
                         && event.y < 500) {
                     nullify();
-                    game.setScreen(new MainMenuScreen(game));
+                    game.setScreen(new MainMenuScreen(game, context));
                     return;
                 }
             }
@@ -185,6 +185,9 @@ public class GameScreen extends Screen {
         // Set all variables to null. You will be recreating them in the
         // constructor.
         paint = null;
+        bg1 = null;
+        bg2 = null;
+        rocket = null;
 
         // Call garbage collector to clean up memory.
         System.gc();
