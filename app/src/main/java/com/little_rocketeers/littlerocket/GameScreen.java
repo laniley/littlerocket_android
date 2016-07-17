@@ -77,17 +77,7 @@ public class GameScreen extends Screen {
     }
 
     private void updateReady(List<TouchEvent> touchEvents) {
-
-        // This example starts with a "Ready" screen.
-        // When the user touches the screen, the game begins.
-        // state now becomes GameState.Running.
-        // Now the updateRunning() method will be called!
-
-        if (touchEvents.size() > 0) {
-            bg1.setSpeed(20);
-            bg2.setSpeed(20);
-            state = GameState.Running;
-        }
+        handleStartMenuTouchEvents(touchEvents);
     }
 
     private void updateRunning(List<TouchEvent> touchEvents, float deltaTime) {
@@ -100,28 +90,59 @@ public class GameScreen extends Screen {
             TouchEvent event = touchEvents.get(i);
 
             if (event.type == TouchEvent.TOUCH_DOWN) {
-
-                if (event.x < 640) {
-                    // Move left.
+/*
+                if (inBounds(event, 0, 285, 65, 65)) {
+                    robot.jump();
+                    currentSprite = anim.getImage();
+                    robot.setDucked(false);
                 }
 
-                else if (event.x > 640) {
+                else if (inBounds(event, 0, 350, 65, 65)) {
+
+                    if (robot.isDucked() == false && robot.isJumped() == false
+                            && robot.isReadyToFire()) {
+                        robot.shoot();
+                    }
+                }
+
+                else if (inBounds(event, 0, 415, 65, 65)
+                        && robot.isJumped() == false) {
+                    currentSprite = Assets.characterDown;
+                    robot.setDucked(true);
+                    robot.setSpeedX(0);
+
+                }
+
+                if (event.x > 400) {
                     // Move right.
-                }
+                    robot.moveRight();
+                    robot.setMovingRight(true);
 
+                }
+*/
             }
 
 
 
             if (event.type == TouchEvent.TOUCH_UP) {
+/*
+                if (inBounds(event, 0, 415, 65, 65)) {
+                    currentSprite = anim.getImage();
+                    robot.setDucked(false);
 
-                if (event.x < 640) {
-                    // Stop moving left.
-                } else if (event.x > 640) {
-                    // Stop moving right. }
                 }
-            }
 
+                if (inBounds(event, 0, 0, 35, 35)) {
+                    pause();
+
+                }
+
+                if (event.x > 400) {
+                    // Move right.
+                    robot.stopRight();
+                }
+                */
+            }
         }
 
         // 2. Check miscellaneous events like death:
@@ -135,13 +156,7 @@ public class GameScreen extends Screen {
     }
 
     private void updatePaused(List<TouchEvent> touchEvents) {
-        int len = touchEvents.size();
-        for (int i = 0; i < len; i++) {
-            TouchEvent event = touchEvents.get(i);
-            if (event.type == TouchEvent.TOUCH_UP) {
-                state = GameState.Running;
-            }
-        }
+        handleStartMenuTouchEvents(touchEvents);
     }
 
     private void updateGameOver(List<TouchEvent> touchEvents) {
@@ -157,6 +172,24 @@ public class GameScreen extends Screen {
             }
         }
 
+    }
+
+    private void handleStartMenuTouchEvents(List<TouchEvent> touchEvents) {
+        int len = touchEvents.size();
+
+        for (int i = 0; i < len; i++) {
+
+            TouchEvent event = touchEvents.get(i);
+
+            if (event.type == TouchEvent.TOUCH_UP) {
+                /* x, y, width, height */
+                if (inBounds(event, (800/2) - (430/2), (1280/2) - (165/2), 430, 165)) {
+                    bg1.setSpeed(20);
+                    bg2.setSpeed(20);
+                    state = GameState.Running;
+                }
+            }
+        }
     }
 
     @Override
@@ -224,6 +257,8 @@ public class GameScreen extends Screen {
         g.drawString("GAME OVER.", 640, 300, paint);
 
     }
+
+
 
     @Override
     public void pause() {
