@@ -10,11 +10,13 @@ import android.view.View;
 import android.widget.Button;
 
 import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.facebook.login.widget.ProfilePictureView;
@@ -24,9 +26,7 @@ import java.io.IOException;
 public class LoginActivity extends Activity {
 
     private CallbackManager callbackManager;
-    private LoginButton loginButton;
     private Button playButton;
-    private Drawable d;
     private ProfilePictureView profilePictureView;
 
     Typeface myTypeface;
@@ -47,7 +47,7 @@ public class LoginActivity extends Activity {
         playButton.setTypeface(myTypeface);
 
         try {
-            d = Drawable.createFromStream(getAssets().open("button_430x165.png"), null);
+            Drawable d = Drawable.createFromStream(getAssets().open("button_430x165.png"), null);
             playButton.setBackgroundDrawable(d);
         }
         catch(IOException e) {
@@ -58,7 +58,18 @@ public class LoginActivity extends Activity {
 
         profilePictureView = (ProfilePictureView) findViewById(R.id.profilePicture);
 
-        loginButton = (LoginButton) this.findViewById(R.id.login_button);
+        new AccessTokenTracker()
+        {
+            @Override
+            protected void onCurrentAccessTokenChanged(AccessToken oldToken, AccessToken newToken) {
+                if (newToken == null){
+                    profilePictureView.setProfileId(null);
+                    playButton.setVisibility(View.INVISIBLE);
+                }
+            }
+        };
+
+        LoginButton loginButton = (LoginButton) this.findViewById(R.id.login_button);
         loginButton.setReadPermissions("public_profile", "user_friends");
         loginButton.registerCallback(callbackManager, mCallBack);
     }
@@ -66,33 +77,51 @@ public class LoginActivity extends Activity {
     @Override
     public void onResume() {
         super.onResume();
-/*
+
         if(AccessToken.getCurrentAccessToken() == null) {
             playButton.setVisibility(View.INVISIBLE);
-
             profilePictureView.destroyDrawingCache();
         }
         else {
-        */
+
             playButton.setVisibility(View.VISIBLE);
-/*
-            //profilePictureView.setProfileId(Profile.getCurrentProfile().getId());
+            if(Profile.getCurrentProfile() != null) {
+                profilePictureView.setProfileId(Profile.getCurrentProfile().getId());
+            }
         }
-        */
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+        if(callbackManager.onActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
     }
 
     private FacebookCallback<LoginResult> mCallBack = new FacebookCallback<LoginResult>() {
+
+        private ProfileTracker mProfileTracker;
+
         @Override
         public void onSuccess(LoginResult loginResult) {
-            Log.e("Successful logged in", loginResult.getAccessToken().toString());
+            Log.v("Successful logged in", loginResult.getAccessToken().toString());
 
-            //profilePictureView.setProfileId(Profile.getCurrentProfile().getId());
+            if(Profile.getCurrentProfile() == null) {
+                mProfileTracker = new ProfileTracker() {
+                    @Override
+                    protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
+                        Log.v("facebook - profile", currentProfile.getFirstName());
+                        mProfileTracker.stopTracking();
+                        profilePictureView.setProfileId(Profile.getCurrentProfile().getId());
+                    }
+                };
+            }
+            else {
+                Profile profile = Profile.getCurrentProfile();
+                Log.v("facebook - profile", profile.getFirstName());
+                profilePictureView.setProfileId(Profile.getCurrentProfile().getId());
+            }
 
             playButton.setVisibility(View.VISIBLE);
         }
