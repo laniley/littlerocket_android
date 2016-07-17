@@ -1,4 +1,4 @@
-package com.little_rocketeers.game;
+package com.little_rocketeers.littlerocket;
 
 /**
  * Created by Melanie on 09.07.2016.

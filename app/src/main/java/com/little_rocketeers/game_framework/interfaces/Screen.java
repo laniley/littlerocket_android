@@ -1,4 +1,6 @@
-package com.little_rocketeers.game_framework;
+package com.little_rocketeers.game_framework.interfaces;
+
+import com.little_rocketeers.game_framework.interfaces.Game;
 
 /**
  * Created by Melanie on 03.07.2016.

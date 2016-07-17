@@ -1,4 +1,4 @@
-package com.little_rocketeers.game;
+package com.little_rocketeers.littlerocket;
 
 /**
  * Created by Melanie on 03.07.2016.
@@ -10,10 +10,10 @@ import android.graphics.Typeface;
 
 import java.util.List;
 
-import com.little_rocketeers.game_framework.Game;
-import com.little_rocketeers.game_framework.Graphics;
-import com.little_rocketeers.game_framework.Screen;
-import com.little_rocketeers.game_framework.Input.TouchEvent;
+import com.little_rocketeers.game_framework.interfaces.Game;
+import com.little_rocketeers.game_framework.interfaces.Graphics;
+import com.little_rocketeers.game_framework.interfaces.Screen;
+import com.little_rocketeers.game_framework.interfaces.Input.TouchEvent;
 
 public class MainMenuScreen extends Screen {
 

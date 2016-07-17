@@ -16,8 +16,8 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
 
-import com.little_rocketeers.game_framework.Graphics;
-import com.little_rocketeers.game_framework.Image;
+import com.little_rocketeers.game_framework.interfaces.Graphics;
+import com.little_rocketeers.game_framework.interfaces.Image;
 
 public class AndroidGraphics implements Graphics {
     AssetManager assets;

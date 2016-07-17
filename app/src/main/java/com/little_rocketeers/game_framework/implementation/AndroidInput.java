@@ -9,7 +9,7 @@ import android.content.Context;
 import android.os.Build.VERSION;
 import android.view.View;
 
-import com.little_rocketeers.game_framework.Input;
+import com.little_rocketeers.game_framework.interfaces.Input;
 
 public class AndroidInput implements Input {
     TouchHandler touchHandler;

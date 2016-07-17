@@ -5,8 +5,8 @@ package com.little_rocketeers.game_framework.implementation;
  */
 import android.graphics.Bitmap;
 
-import com.little_rocketeers.game_framework.Image;
-import com.little_rocketeers.game_framework.Graphics.ImageFormat;
+import com.little_rocketeers.game_framework.interfaces.Image;
+import com.little_rocketeers.game_framework.interfaces.Graphics.ImageFormat;
 
 public class AndroidImage implements Image {
     Bitmap bitmap;

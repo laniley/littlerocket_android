@@ -14,12 +14,14 @@ import android.os.PowerManager.WakeLock;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.little_rocketeers.game_framework.Audio;
-import com.little_rocketeers.game_framework.FileIO;
-import com.little_rocketeers.game_framework.Game;
-import com.little_rocketeers.game_framework.Graphics;
-import com.little_rocketeers.game_framework.Input;
-import com.little_rocketeers.game_framework.Screen;
+import com.facebook.FacebookSdk;
+
+import com.little_rocketeers.game_framework.interfaces.Audio;
+import com.little_rocketeers.game_framework.interfaces.FileIO;
+import com.little_rocketeers.game_framework.interfaces.Game;
+import com.little_rocketeers.game_framework.interfaces.Graphics;
+import com.little_rocketeers.game_framework.interfaces.Input;
+import com.little_rocketeers.game_framework.interfaces.Screen;
 
 public abstract class AndroidGameActivity extends Activity implements Game {
     AndroidFastRenderView renderView;
@@ -33,6 +35,10 @@ public abstract class AndroidGameActivity extends Activity implements Game {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Initialize the SDK before executing any other operations,
+        // especially, if using Facebook UI elements.
+        FacebookSdk.sdkInitialize(getApplicationContext());
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);

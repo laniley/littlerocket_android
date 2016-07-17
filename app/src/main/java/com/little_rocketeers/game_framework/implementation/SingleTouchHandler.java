@@ -10,9 +10,9 @@ import java.util.List;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.little_rocketeers.game_framework.Pool;
-import com.little_rocketeers.game_framework.Input.TouchEvent;
-import com.little_rocketeers.game_framework.Pool.PoolObjectFactory;
+import com.little_rocketeers.game_framework.interfaces.Pool;
+import com.little_rocketeers.game_framework.interfaces.Input.TouchEvent;
+import com.little_rocketeers.game_framework.interfaces.Pool.PoolObjectFactory;
 
 public class SingleTouchHandler implements TouchHandler {
     boolean isTouched;

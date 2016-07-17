@@ -11,9 +11,9 @@ import android.content.res.AssetManager;
 import android.media.AudioManager;
 import android.media.SoundPool;
 
-import com.little_rocketeers.game_framework.Audio;
-import com.little_rocketeers.game_framework.Music;
-import com.little_rocketeers.game_framework.Sound;
+import com.little_rocketeers.game_framework.interfaces.Audio;
+import com.little_rocketeers.game_framework.interfaces.Music;
+import com.little_rocketeers.game_framework.interfaces.Sound;
 
 public class AndroidAudio implements Audio {
     AssetManager assets;

@@ -1,13 +1,12 @@
-package com.little_rocketeers.game;
+package com.little_rocketeers.littlerocket;
 
 /**
  * Created by Melanie on 03.07.2016.
  */
-import android.media.MediaPlayer;
 
-import com.little_rocketeers.game_framework.Image;
-import com.little_rocketeers.game_framework.Music;
-import com.little_rocketeers.game_framework.Sound;
+import com.little_rocketeers.game_framework.interfaces.Image;
+import com.little_rocketeers.game_framework.interfaces.Music;
+import com.little_rocketeers.game_framework.interfaces.Sound;
 
 public class Assets {
     public static Image

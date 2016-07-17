@@ -12,7 +12,7 @@ import android.media.MediaPlayer.OnPreparedListener;
 import android.media.MediaPlayer.OnSeekCompleteListener;
 import android.media.MediaPlayer.OnVideoSizeChangedListener;
 
-import com.little_rocketeers.game_framework.Music;
+import com.little_rocketeers.game_framework.interfaces.Music;
 
 public class AndroidMusic implements Music, OnCompletionListener, OnSeekCompleteListener, OnPreparedListener, OnVideoSizeChangedListener {
     MediaPlayer mediaPlayer;

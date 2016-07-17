@@ -7,7 +7,7 @@ import java.util.List;
 
 import android.view.View.OnTouchListener;
 
-import com.little_rocketeers.game_framework.Input.TouchEvent;
+import com.little_rocketeers.game_framework.interfaces.Input.TouchEvent;
 
 public interface TouchHandler extends OnTouchListener {
     public boolean isTouchDown(int pointer);

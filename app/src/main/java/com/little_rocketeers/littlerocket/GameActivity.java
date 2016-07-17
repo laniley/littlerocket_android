@@ -1,17 +1,10 @@
-package com.little_rocketeers.game;
+package com.little_rocketeers.littlerocket;
 
 /**
  * Created by Melanie on 03.07.2016.
  */
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
-import android.content.res.Configuration;
-import android.util.Log;
-
-import com.little_rocketeers.game_framework.Screen;
+import com.little_rocketeers.game_framework.interfaces.Screen;
 import com.little_rocketeers.game_framework.implementation.AndroidGameActivity;
 
 public class GameActivity extends AndroidGameActivity {
