@@ -6,6 +6,7 @@ package com.little_rocketeers.littlerocket;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -27,8 +28,8 @@ public class GameScreen extends Screen {
     GameState state = GameState.Ready;
 
     private static Background bg1, bg2;
+    private static Rocket rocket;
 
-    private Image rocket;
 
     // Variable Setup
     // You would create game objects here.
@@ -45,7 +46,7 @@ public class GameScreen extends Screen {
         bg1 = new Background(0, 0);
         bg2 = new Background(0, -1280);
 
-        rocket = Assets.rocket;
+        rocket = new Rocket();
 
         myTypeface = Typeface.createFromAsset(context.getAssets(), "fonts/kraash_black.ttf");
 
@@ -138,7 +139,7 @@ public class GameScreen extends Screen {
         for (int i = 0; i < len; i++) {
             TouchEvent event = touchEvents.get(i);
             if (event.type == TouchEvent.TOUCH_UP) {
-
+                state = GameState.Running;
             }
         }
     }
@@ -151,7 +152,6 @@ public class GameScreen extends Screen {
                 if (event.x > 300 && event.x < 980 && event.y > 100
                         && event.y < 500) {
                     nullify();
-                    game.setScreen(new MainMenuScreen(game, context));
                     return;
                 }
             }
@@ -166,7 +166,7 @@ public class GameScreen extends Screen {
         // First draw the game elements.
         g.drawImage(Assets.background, bg1.getBgX(), bg1.getBgY());
         g.drawImage(Assets.background, bg2.getBgX(), bg2.getBgY());
-        // g.drawImage(Assets.character, characterX, characterY);
+        g.drawImage(Assets.rocket, rocket.getCenterX(), rocket.getCenterY());
 
         // Secondly, draw the UI above the game elements.
         if (state == GameState.Ready)
@@ -244,7 +244,13 @@ public class GameScreen extends Screen {
 
     @Override
     public void backButton() {
-        //pause();
-        game.setScreen(new MainMenuScreen(game, context));
+        if (state == GameState.Running) {
+            pause();
+        }
+        else {
+            Intent myIntent = new Intent(context, LoginActivity.class);
+            myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(myIntent);
+        }
     }
 }

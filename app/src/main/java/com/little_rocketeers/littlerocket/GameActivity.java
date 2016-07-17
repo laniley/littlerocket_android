@@ -23,7 +23,6 @@ public class GameActivity extends AndroidGameActivity {
 
         if(accessToken == null) {
             Intent myIntent = new Intent(this, LoginActivity.class);
-            //myIntent.putExtra("key", value); //Optional parameters
             this.startActivity(myIntent);
         }
 

@@ -1,5 +1,9 @@
 package com.little_rocketeers.littlerocket;
 
+import com.little_rocketeers.game_framework.interfaces.Game;
+import com.little_rocketeers.game_framework.interfaces.Graphics;
+import com.little_rocketeers.game_framework.interfaces.Image;
+
 /**
  * Created by Melanie on 09.07.2016.
  */
@@ -8,8 +12,8 @@ public class Rocket {
     // Constants are Here
     final int MOVESPEED = 5;
 
-    private int centerX = 400;
-    private int centerY = 377;
+    private int centerX = 400 - 50;
+    private int centerY = 800;
 
     private int speedX = 0;
     private int speedY = 0;

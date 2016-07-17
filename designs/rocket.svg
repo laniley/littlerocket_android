@@ -160,7 +160,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
      inkscape:cx="12.522868"
-     inkscape:cy="85.01997"
+     inkscape:cy="145.62912"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -187,7 +187,7 @@
      id="layer1">
     <g
        id="g3333-51"
-       transform="matrix(0.99990938,0,0,0.60746469,325.34378,799.83456)"
+       transform="matrix(1.9998275,0,0,1.2149347,650.69041,547.30473)"
        inkscape:export-filename="C:\xampp\htdocs\LittleRocket\images\test.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
@@ -203,13 +203,13 @@
        d="m 13.269012,112.3999 -1.020693,-10.71728 1.020693,21.9449 1.020694,-26.027677 2.041386,33.172527 2.041387,-37.2553 0,44.9105 3.06208,-43.37946 1.020693,44.40016 4.082773,-47.972587 2.041386,45.420847 2.551734,-41.338074 0,33.682874 2.041386,-33.682874 1.020693,29.600104 1.53104,-25.517331"
        id="path3321-1"
        inkscape:connector-curvature="0"
-       transform="matrix(0.93824304,0,0,0.79820863,2.5398407,931.04217)"
+       transform="matrix(1.8764943,0,0,1.5964242,5.0797072,809.72109)"
        inkscape:export-filename="C:\xampp\htdocs\LittleRocket\images\test.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <g
        id="g5365-4-2"
-       transform="matrix(1.0368782,0,0,0.85782738,-290.11757,763.28919)">
+       transform="matrix(2.0737655,0,0,1.7156623,-580.23767,474.21367)">
       <path
          inkscape:connector-curvature="0"
          id="rect3005-5-761"
@@ -224,9 +224,10 @@
     </g>
     <g
        id="g3026"
-       inkscape:export-filename="D:\Development\littlerocket_android\app\src\main\assets\rocket_50x140.png"
+       inkscape:export-filename="D:\Development\littlerocket_android\app\src\main\assets\rocket.png"
        inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
+       inkscape:export-ydpi="90"
+       transform="matrix(2.0000087,0,0,2.0000087,3.5679752e-6,-1052.3714)">
       <g
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
