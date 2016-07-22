@@ -3,6 +3,7 @@ package com.little_rocketeers.littlerocket;
 import com.little_rocketeers.game_framework.interfaces.Game;
 import com.little_rocketeers.game_framework.interfaces.Graphics;
 import com.little_rocketeers.game_framework.interfaces.Image;
+import com.little_rocketeers.game_framework.interfaces.Screen;
 
 /**
  * Created by Melanie on 09.07.2016.
@@ -10,36 +11,28 @@ import com.little_rocketeers.game_framework.interfaces.Image;
 
 public class Rocket {
     // Constants are Here
-    final int MOVESPEED = 5;
+    final int MOVESPEED = 10;
 
-    private int centerX = 400 - 50;
+    private final Screen screen;
+
+    private int centerX;
     private int centerY = 800;
 
     private int speedX = 0;
     private int speedY = 0;
 
-    private boolean movingLeft = false;
-    private boolean movingRight = false;
+    public Rocket(Screen screen) {
+        this.screen = screen;
+        centerX = (screen.getWidth() / 2) - 50;
+    }
 
     public void update() {
-        // Moves Character
-        if (speedX < 0) {
+        // Moves Rocket
+        if ((centerX + 100) < screen.getWidth() && speedX > 0) {
             centerX += speedX;
         }
-        if (centerX <= 200 && speedX > 0) {
+        else if (centerX > 0 && speedX < 0) {
             centerX += speedX;
-        }
-
-        // Updates Y Position
-        centerY += speedY;
-
-        // Handles Jumping
-
-        speedY += 1;
-
-        // Prevents going beyond X coordinate of 0
-        if (centerX + speedX <= 60) {
-            centerX = 61;
         }
     }
 
@@ -51,29 +44,8 @@ public class Rocket {
         speedX = -MOVESPEED;
     }
 
-    public void stopRight() {
-        setMovingRight(false);
-        stop();
-    }
-
-    public void stopLeft() {
-        setMovingLeft(false);
-        stop();
-    }
-
-    private void stop() {
-        if (isMovingRight() == false && isMovingLeft() == false) {
-            speedX = 0;
-        }
-
-        if (isMovingRight() == false && isMovingLeft() == true) {
-            moveLeft();
-        }
-
-        if (isMovingRight() == true && isMovingLeft() == false) {
-            moveRight();
-        }
-
+    public void stop() {
+        speedX = 0;
     }
 
     public int getCenterX() {
@@ -106,21 +78,5 @@ public class Rocket {
 
     public void setSpeedY(int speedY) {
         this.speedY = speedY;
-    }
-
-    public boolean isMovingRight() {
-        return movingRight;
-    }
-
-    public void setMovingRight(boolean movingRight) {
-        this.movingRight = movingRight;
-    }
-
-    public boolean isMovingLeft() {
-        return movingLeft;
-    }
-
-    public void setMovingLeft(boolean movingLeft) {
-        this.movingLeft = movingLeft;
     }
 }

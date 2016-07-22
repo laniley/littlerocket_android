@@ -1,15 +1,22 @@
 package com.little_rocketeers.game_framework.interfaces;
 
-import com.little_rocketeers.game_framework.interfaces.Game;
+import android.content.Context;
+import android.view.Display;
+import android.view.WindowManager;
 
 /**
  * Created by Melanie on 03.07.2016.
  */
 public abstract class Screen {
-    protected final Game game;
 
-    public Screen(Game game) {
+    protected final Game game;
+    protected final Context context;
+    protected final int width = 800;
+    protected final int height = 1280;
+
+    public Screen(Game game, Context context) {
         this.game = game;
+        this.context = context;
     }
 
     public abstract void update(float deltaTime);
@@ -24,6 +31,14 @@ public abstract class Screen {
             return true;
         else
             return false;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 
 }

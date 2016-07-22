@@ -19,8 +19,6 @@ import com.little_rocketeers.game_framework.interfaces.Input.TouchEvent;
 
 public class GameScreen extends Screen {
 
-    Context context;
-
     enum GameState {
         Ready, Running, Paused, GameOver
     }
@@ -30,7 +28,6 @@ public class GameScreen extends Screen {
     private static Background bg1, bg2;
     private static Rocket rocket;
 
-
     // Variable Setup
     // You would create game objects here.
 
@@ -39,14 +36,13 @@ public class GameScreen extends Screen {
     Paint paint;
 
     public GameScreen(Game game, Context context) {
-        super(game);
-        this.context = context;
+        super(game, context);
 
         // Initialize game objects here
         bg1 = new Background(0, 0);
         bg2 = new Background(0, -1280);
 
-        rocket = new Rocket();
+        rocket = new Rocket(this);
 
         myTypeface = Typeface.createFromAsset(context.getAssets(), "fonts/kraash_black.ttf");
 
@@ -90,58 +86,23 @@ public class GameScreen extends Screen {
             TouchEvent event = touchEvents.get(i);
 
             if (event.type == TouchEvent.TOUCH_DOWN) {
-/*
-                if (inBounds(event, 0, 285, 65, 65)) {
-                    robot.jump();
-                    currentSprite = anim.getImage();
-                    robot.setDucked(false);
-                }
 
-                else if (inBounds(event, 0, 350, 65, 65)) {
-
-                    if (robot.isDucked() == false && robot.isJumped() == false
-                            && robot.isReadyToFire()) {
-                        robot.shoot();
-                    }
-                }
-
-                else if (inBounds(event, 0, 415, 65, 65)
-                        && robot.isJumped() == false) {
-                    currentSprite = Assets.characterDown;
-                    robot.setDucked(true);
-                    robot.setSpeedX(0);
-
-                }
-
-                if (event.x > 400) {
+                if (event.x > getWidth() / 2) {
                     // Move right.
-                    robot.moveRight();
-                    robot.setMovingRight(true);
+                    rocket.moveRight();
 
                 }
-*/
+                else if (event.x < getWidth() / 2) {
+                    // Move left.
+                    rocket.moveLeft();
+
+                }
+
             }
 
 
-
             if (event.type == TouchEvent.TOUCH_UP) {
-/*
-                if (inBounds(event, 0, 415, 65, 65)) {
-                    currentSprite = anim.getImage();
-                    robot.setDucked(false);
-
-                }
-
-                if (inBounds(event, 0, 0, 35, 35)) {
-                    pause();
-
-                }
-
-                if (event.x > 400) {
-                    // Move right.
-                    robot.stopRight();
-                }
-                */
+                rocket.stop();
             }
         }
 
@@ -153,6 +114,7 @@ public class GameScreen extends Screen {
 
         bg1.update();
         bg2.update();
+        rocket.update();
     }
 
     private void updatePaused(List<TouchEvent> touchEvents) {

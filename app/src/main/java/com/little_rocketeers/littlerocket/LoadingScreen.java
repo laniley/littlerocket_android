@@ -12,11 +12,8 @@ import com.little_rocketeers.game_framework.interfaces.Screen;
 
 public class LoadingScreen extends Screen {
 
-    private Context context;
-
     public LoadingScreen(Game game, Context context) {
-        super(game);
-        this.context = context;
+        super(game, context);
     }
 
 
