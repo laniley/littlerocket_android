@@ -18,30 +18,29 @@ public class Rocket extends AndroidSprite{
     // Constants are Here
     final int MOVESPEED = 10;
 
-    private final Screen screen;
-
     private int speedX = 0;
     private int speedY = 0;
 
 
     public Rocket(Screen screen, Game game, int width, int height) {
+        super(screen, game, width, height);
 
-        super(game, width, height);
-
-        this.screen = screen;
-        this.setCenterX((screen.getWidth() / 2) - 50);
+        this.setX((screen.getWidth() / 2) - (width / 2));
         this.setY(800);
     }
 
     public void update() {
         // Moves Rocket
-        if ((getCenterX() + 100) < screen.getWidth() && speedX > 0) {
-            //setCenterX(getCenterX() + speedX);
+        if ((getX() + (2.5 * width)) < screen.getWidth() && speedX > 0) {
             this.rotate(45);
+            setX(getX() + speedX);
+            setY(getY() - speedX);
         }
-        else if (getCenterX() > 0 && speedX < 0) {
-            //setCenterX(getCenterX() + speedX);
+        else if ((getX() - (1.5 * width)) > 0 && speedX < 0) {
+            System.out.println(getX() - (1.5 * width));
             this.rotate(-45);
+            setX(getX() + speedX);
+            setY(getY() + speedX);
         }
     }
 

@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.little_rocketeers.game_framework.interfaces.Game;
+import com.little_rocketeers.game_framework.interfaces.Screen;
 import com.little_rocketeers.game_framework.interfaces.Sprite;
 import com.little_rocketeers.game_framework.interfaces.Graphics;
 import com.little_rocketeers.game_framework.interfaces.Image;
@@ -17,21 +18,22 @@ import com.little_rocketeers.game_framework.interfaces.Image;
 public class AndroidSprite extends AndroidGraphics implements Sprite {
 
     private Bitmap bitmap;
-    private Canvas canvas;
+    protected Canvas canvas;
+    protected Screen screen;
     private Paint paint;
 
     private int x;
     private int y;
 
-    private int width;
-    private int height;
+    protected int width;
+    protected int height;
 
     private int centerX;
     private int centerY;
 
     private int angle = 0;
 
-    public AndroidSprite(Game game, int width, int height) {
+    public AndroidSprite(Screen screen, Game game, int width, int height) {
 
         super(game.getAssetManager(), game.getFrameBuffer());
 
@@ -42,6 +44,8 @@ public class AndroidSprite extends AndroidGraphics implements Sprite {
         paint.setColor(Color.parseColor("#303637"));
 
         this.canvas = new Canvas(game.getFrameBuffer());
+        this.screen = screen;
+
         this.width = width;
         this.height = height;
     }
@@ -58,13 +62,13 @@ public class AndroidSprite extends AndroidGraphics implements Sprite {
             else if(newAngle < this.angle) {
                 delta = -1 * (this.angle - newAngle);
             }
-            this.canvas.rotate(delta, 400, this.getCenterY());
+            this.canvas.rotate(delta, this.getCenterX(), this.getCenterY());
             this.angle = newAngle;
         }
     }
 
     public void paint(Image Image) {
-        this.canvas.drawBitmap(((AndroidImage)Image).bitmap, this.getCenterX(), this.y, null);
+        this.canvas.drawBitmap(((AndroidImage)Image).bitmap, this.x, this.y, null);
     }
 
     // SETTER / GETTER
@@ -77,6 +81,14 @@ public class AndroidSprite extends AndroidGraphics implements Sprite {
         return centerY;
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
     public void setCenterX(int centerX) {
         this.centerX = centerX;
     }
@@ -87,6 +99,7 @@ public class AndroidSprite extends AndroidGraphics implements Sprite {
 
     public void setX(int x) {
         this.x = x;
+        this.setCenterX(x + ( width/2 ) );
     }
 
     public void setY(int y) {
