@@ -20,11 +20,18 @@ public class AndroidSprite extends AndroidGraphics implements Sprite {
     private Canvas canvas;
     private Paint paint;
 
+    private int x;
+    private int y;
+
+    private int width;
+    private int height;
+
     private int centerX;
     private int centerY;
+
     private int angle = 0;
 
-    public AndroidSprite(Game game) {
+    public AndroidSprite(Game game, int width, int height) {
 
         super(game.getAssetManager(), game.getFrameBuffer());
 
@@ -35,11 +42,14 @@ public class AndroidSprite extends AndroidGraphics implements Sprite {
         paint.setColor(Color.parseColor("#303637"));
 
         this.canvas = new Canvas(game.getFrameBuffer());
+        this.width = width;
+        this.height = height;
     }
 
     public void rotate(int newAngle) {
-        /*
+
         newAngle = newAngle % 360;
+
         if(this.angle != newAngle) {
             int delta = 0;
             if(newAngle > this.angle) {
@@ -48,16 +58,16 @@ public class AndroidSprite extends AndroidGraphics implements Sprite {
             else if(newAngle < this.angle) {
                 delta = -1 * (this.angle - newAngle);
             }
-            this.canvas.rotate(delta, centerX, centerY);
+            this.canvas.rotate(delta, 400, this.getCenterY());
             this.angle = newAngle;
         }
-        */
-        this.canvas.rotate(newAngle, centerX, centerY);
     }
 
     public void paint(Image Image) {
-        this.canvas.drawBitmap(((AndroidImage)Image).bitmap, this.getCenterX(), this.getCenterY(), null);
+        this.canvas.drawBitmap(((AndroidImage)Image).bitmap, this.getCenterX(), this.y, null);
     }
+
+    // SETTER / GETTER
 
     public int getCenterX() {
         return centerX;
@@ -71,7 +81,16 @@ public class AndroidSprite extends AndroidGraphics implements Sprite {
         this.centerX = centerX;
     }
 
-    public void setCenterY(int centerY) {
+    private void setCenterY(int centerY) {
         this.centerY = centerY;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+        this.setCenterY(y + ( height/2 ) );
     }
 }

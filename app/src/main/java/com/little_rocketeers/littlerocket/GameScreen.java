@@ -42,7 +42,7 @@ public class GameScreen extends Screen {
         bg1 = new Background(0, 0);
         bg2 = new Background(0, -1280);
 
-        rocket = new Rocket(this, game);
+        rocket = new Rocket(this, game, 100, 280);
 
         myTypeface = Typeface.createFromAsset(context.getAssets(), "fonts/kraash_black.ttf");
 

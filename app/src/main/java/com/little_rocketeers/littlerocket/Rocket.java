@@ -24,23 +24,23 @@ public class Rocket extends AndroidSprite{
     private int speedY = 0;
 
 
-    public Rocket(Screen screen, Game game) {
-        // width, height
-        super(game);
+    public Rocket(Screen screen, Game game, int width, int height) {
+
+        super(game, width, height);
 
         this.screen = screen;
         this.setCenterX((screen.getWidth() / 2) - 50);
-        this.setCenterY(800);
+        this.setY(800);
     }
 
     public void update() {
         // Moves Rocket
         if ((getCenterX() + 100) < screen.getWidth() && speedX > 0) {
-            setCenterX(getCenterX() + speedX);
+            //setCenterX(getCenterX() + speedX);
             this.rotate(45);
         }
         else if (getCenterX() > 0 && speedX < 0) {
-            setCenterX(getCenterX() + speedX);
+            //setCenterX(getCenterX() + speedX);
             this.rotate(-45);
         }
     }
