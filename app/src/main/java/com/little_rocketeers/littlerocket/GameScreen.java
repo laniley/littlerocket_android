@@ -42,7 +42,7 @@ public class GameScreen extends Screen {
         bg1 = new Background(0, 0);
         bg2 = new Background(0, -1280);
 
-        rocket = new Rocket(this);
+        rocket = new Rocket(this, game);
 
         myTypeface = Typeface.createFromAsset(context.getAssets(), "fonts/kraash_black.ttf");
 
@@ -161,7 +161,7 @@ public class GameScreen extends Screen {
         // First draw the game elements.
         g.drawImage(Assets.background, bg1.getBgX(), bg1.getBgY());
         g.drawImage(Assets.background, bg2.getBgX(), bg2.getBgY());
-        g.drawImage(Assets.rocket, rocket.getCenterX(), rocket.getCenterY());
+        rocket.paint(Assets.rocket);
 
         // Secondly, draw the UI above the game elements.
         if (state == GameState.Ready)

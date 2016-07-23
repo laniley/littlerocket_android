@@ -1,5 +1,9 @@
 package com.little_rocketeers.littlerocket;
 
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+
+import com.little_rocketeers.game_framework.implementation.AndroidGraphics;
 import com.little_rocketeers.game_framework.interfaces.Game;
 import com.little_rocketeers.game_framework.interfaces.Graphics;
 import com.little_rocketeers.game_framework.interfaces.Image;
@@ -8,31 +12,36 @@ import com.little_rocketeers.game_framework.interfaces.Screen;
 /**
  * Created by Melanie on 09.07.2016.
  */
+import com.little_rocketeers.game_framework.implementation.AndroidSprite;
 
-public class Rocket {
+public class Rocket extends AndroidSprite{
     // Constants are Here
     final int MOVESPEED = 10;
 
     private final Screen screen;
 
-    private int centerX;
-    private int centerY = 800;
-
     private int speedX = 0;
     private int speedY = 0;
 
-    public Rocket(Screen screen) {
+
+    public Rocket(Screen screen, Game game) {
+        // width, height
+        super(game);
+
         this.screen = screen;
-        centerX = (screen.getWidth() / 2) - 50;
+        this.setCenterX((screen.getWidth() / 2) - 50);
+        this.setCenterY(800);
     }
 
     public void update() {
         // Moves Rocket
-        if ((centerX + 100) < screen.getWidth() && speedX > 0) {
-            centerX += speedX;
+        if ((getCenterX() + 100) < screen.getWidth() && speedX > 0) {
+            setCenterX(getCenterX() + speedX);
+            this.rotate(45);
         }
-        else if (centerX > 0 && speedX < 0) {
-            centerX += speedX;
+        else if (getCenterX() > 0 && speedX < 0) {
+            setCenterX(getCenterX() + speedX);
+            this.rotate(-45);
         }
     }
 
@@ -48,28 +57,12 @@ public class Rocket {
         speedX = 0;
     }
 
-    public int getCenterX() {
-        return centerX;
-    }
-
-    public int getCenterY() {
-        return centerY;
-    }
-
     public int getSpeedX() {
         return speedX;
     }
 
     public int getSpeedY() {
         return speedY;
-    }
-
-    public void setCenterX(int centerX) {
-        this.centerX = centerX;
-    }
-
-    public void setCenterY(int centerY) {
-        this.centerY = centerY;
     }
 
     public void setSpeedX(int speedX) {
@@ -79,4 +72,6 @@ public class Rocket {
     public void setSpeedY(int speedY) {
         this.speedY = speedY;
     }
+
+
 }

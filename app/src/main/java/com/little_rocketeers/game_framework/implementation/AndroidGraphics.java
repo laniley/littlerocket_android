@@ -12,6 +12,7 @@ import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
@@ -80,8 +81,7 @@ public class AndroidGraphics implements Graphics {
 
     @Override
     public void clearScreen(int color) {
-        canvas.drawRGB((color & 0xff0000) >> 16, (color & 0xff00) >> 8,
-                (color & 0xff));
+        canvas.drawRGB((color & 0xff0000) >> 16, (color & 0xff00) >> 8, (color & 0xff));
     }
 
 
@@ -109,9 +109,8 @@ public class AndroidGraphics implements Graphics {
         canvas.drawText(text, x, y, paint);
     }
 
-
-    public void drawImage(Image Image, int x, int y, int srcX, int srcY,
-                          int srcWidth, int srcHeight) {
+    @Override
+    public void drawImage(Image Image, int x, int y, int srcX, int srcY, int srcWidth, int srcHeight) {
         srcRect.left = srcX;
         srcRect.top = srcY;
         srcRect.right = srcX + srcWidth;
@@ -123,8 +122,7 @@ public class AndroidGraphics implements Graphics {
         dstRect.right = x + srcWidth;
         dstRect.bottom = y + srcHeight;
 
-        canvas.drawBitmap(((AndroidImage) Image).bitmap, srcRect, dstRect,
-                null);
+        canvas.drawBitmap(((AndroidImage) Image).bitmap, srcRect, dstRect, null);
     }
 
     @Override
@@ -133,7 +131,6 @@ public class AndroidGraphics implements Graphics {
     }
 
     public void drawScaledImage(Image Image, int x, int y, int width, int height, int srcX, int srcY, int srcWidth, int srcHeight){
-
 
         srcRect.left = srcX;
         srcRect.top = srcY;
@@ -145,8 +142,6 @@ public class AndroidGraphics implements Graphics {
         dstRect.top = y;
         dstRect.right = x + width;
         dstRect.bottom = y + height;
-
-
 
         canvas.drawBitmap(((AndroidImage) Image).bitmap, srcRect, dstRect, null);
 

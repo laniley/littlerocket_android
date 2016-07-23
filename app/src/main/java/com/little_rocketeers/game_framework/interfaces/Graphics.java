@@ -16,7 +16,7 @@ public interface Graphics {
     public void drawRect(int x, int y, int width, int height, int color);
     public void drawImage(Image image, int x, int y, int srcX, int srcY, int srcWidth, int srcHeight);
     public void drawImage(Image image, int x, int y);
-    void drawString(String text, int x, int y, Paint paint);
+    public void drawString(String text, int x, int y, Paint paint);
     public int getWidth();
     public int getHeight();
     public void drawARGB(int i, int j, int k, int l);

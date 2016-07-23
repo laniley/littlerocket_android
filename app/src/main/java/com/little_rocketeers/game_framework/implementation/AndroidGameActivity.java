@@ -5,6 +5,7 @@ package com.little_rocketeers.game_framework.implementation;
  */
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -31,6 +32,8 @@ public abstract class AndroidGameActivity extends Activity implements Game {
     FileIO fileIO;
     Screen screen;
     WakeLock wakeLock;
+    AssetManager assetManager;
+    Bitmap frameBuffer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,15 +49,15 @@ public abstract class AndroidGameActivity extends Activity implements Game {
         boolean isPortrait = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
         int frameBufferWidth = isPortrait ? 800 : 1280;
         int frameBufferHeight = isPortrait ? 1280 : 800;
-        Bitmap frameBuffer = Bitmap.createBitmap(frameBufferWidth, frameBufferHeight, Config.RGB_565);
+        frameBuffer = Bitmap.createBitmap(frameBufferWidth, frameBufferHeight, Config.RGB_565);
 
-        float scaleX = (float) frameBufferWidth
-                / getWindowManager().getDefaultDisplay().getWidth();
-        float scaleY = (float) frameBufferHeight
-                / getWindowManager().getDefaultDisplay().getHeight();
+        float scaleX = (float) frameBufferWidth / getWindowManager().getDefaultDisplay().getWidth();
+        float scaleY = (float) frameBufferHeight / getWindowManager().getDefaultDisplay().getHeight();
+
+        assetManager = getAssets();
 
         renderView = new AndroidFastRenderView(this, frameBuffer);
-        graphics = new AndroidGraphics(getAssets(), frameBuffer);
+        graphics = new AndroidGraphics(assetManager, frameBuffer);
         fileIO = new AndroidFileIO(this);
         audio = new AndroidAudio(this);
         input = new AndroidInput(this, renderView, scaleX, scaleY);
@@ -119,4 +122,8 @@ public abstract class AndroidGameActivity extends Activity implements Game {
     public Screen getCurrentScreen() {
         return screen;
     }
+
+    public AssetManager getAssetManager() { return assetManager; }
+
+    public Bitmap getFrameBuffer() { return frameBuffer; }
 }
