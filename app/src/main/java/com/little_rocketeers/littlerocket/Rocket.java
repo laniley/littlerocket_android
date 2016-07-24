@@ -14,6 +14,8 @@ import com.little_rocketeers.game_framework.interfaces.Screen;
  */
 import com.little_rocketeers.game_framework.implementation.AndroidSprite;
 
+import java.util.Date;
+
 public class Rocket extends AndroidSprite{
     // Constants are Here
     final int MOVESPEED = 10;
@@ -21,32 +23,33 @@ public class Rocket extends AndroidSprite{
     private int speedX = 0;
     private int speedY = 0;
 
+    private int rotation_speed = 5;
 
-    public Rocket(Screen screen, Game game, int width, int height) {
-        super(screen, game, width, height);
+
+    public Rocket(Screen screen, Game game, Image image, int width, int height) {
+        super(screen, game, image, width, height);
 
         this.setX((screen.getWidth() / 2) - (width / 2));
         this.setY(800);
     }
 
     public void update() {
-        // Moves Rocket
-        if ((getX() + (2.5 * width)) < screen.getWidth() && speedX > 0) {
-            this.rotate(45);
+        // move right
+        if ((getX() + width) < screen.getWidth() && speedX > 0) {
             setX(getX() + speedX);
-            setY(getY() - speedX);
+            rotateRight();
         }
-        else if ((getX() - (1.5 * width)) > 0 && speedX < 0) {
-            System.out.println(getX() - (1.5 * width));
-            this.rotate(-45);
+        // move left
+        else if (getX() > 0 && speedX < 0) {
             setX(getX() + speedX);
-            setY(getY() + speedX);
+            rotateLeft();
+        }
+        else {
+            resetToDefaultPosition();
         }
     }
 
-    public void moveRight() {
-        speedX = MOVESPEED;
-    }
+    public void moveRight() { speedX = MOVESPEED; }
 
     public void moveLeft() {
         speedX = -MOVESPEED;
@@ -54,6 +57,10 @@ public class Rocket extends AndroidSprite{
 
     public void stop() {
         speedX = 0;
+    }
+
+    public int getAngle() {
+        return angle;
     }
 
     public int getSpeedX() {
@@ -72,5 +79,31 @@ public class Rocket extends AndroidSprite{
         this.speedY = speedY;
     }
 
+    private void rotateLeft() {
+        if ((this.angle - rotation_speed) > -45) {
+            this.rotate(this.angle - rotation_speed);
+        } else {
+            this.rotate(-45);
+        }
+    }
+
+    private void rotateRight() {
+        if ((this.angle + rotation_speed) < 45) {
+            this.rotate(this.angle + rotation_speed);
+        } else {
+            this.rotate(45);
+        }
+    }
+
+    private void resetToDefaultPosition() {
+        if ((this.angle - rotation_speed) > 0) {
+            this.rotate(this.angle - rotation_speed);
+        } else if ((this.angle + rotation_speed) < 0) {
+            this.rotate(this.angle + rotation_speed);
+        }
+        else {
+            this.rotate(0);
+        }
+    }
 
 }

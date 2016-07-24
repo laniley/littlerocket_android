@@ -42,7 +42,7 @@ public class GameScreen extends Screen {
         bg1 = new Background(0, 0);
         bg2 = new Background(0, -1280);
 
-        rocket = new Rocket(this, game, 100, 280);
+        rocket = new Rocket(this, game, Assets.rocket, 100, 280);
 
         myTypeface = Typeface.createFromAsset(context.getAssets(), "fonts/kraash_black.ttf");
 
@@ -88,16 +88,11 @@ public class GameScreen extends Screen {
             if (event.type == TouchEvent.TOUCH_DOWN) {
 
                 if (event.x > getWidth() / 2) {
-                    // Move right.
                     rocket.moveRight();
-
                 }
                 else if (event.x < getWidth() / 2) {
-                    // Move left.
                     rocket.moveLeft();
-
                 }
-
             }
 
 
@@ -161,7 +156,7 @@ public class GameScreen extends Screen {
         // First draw the game elements.
         g.drawImage(Assets.background, bg1.getBgX(), bg1.getBgY());
         g.drawImage(Assets.background, bg2.getBgX(), bg2.getBgY());
-        rocket.paint(Assets.rocket);
+        rocket.paint();
 
         // Secondly, draw the UI above the game elements.
         if (state == GameState.Ready)
