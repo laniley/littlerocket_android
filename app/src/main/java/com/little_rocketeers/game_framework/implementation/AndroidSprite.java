@@ -4,6 +4,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.RectF;
 
 import com.little_rocketeers.game_framework.interfaces.Game;
 import com.little_rocketeers.game_framework.interfaces.Screen;
@@ -27,11 +29,14 @@ public class AndroidSprite extends AndroidGraphics implements Sprite {
     protected int width;
     protected int height;
 
-    private int centerX;
-    private int centerY;
+    protected int centerX;
+    protected int centerY;
+
+    public RectF collisionBox = new RectF(0,0,0,0);
 
     protected int angle = 0;
     private Matrix matrix;
+    private Matrix collisionMatrix;
 
     public AndroidSprite(Screen screen, Game game, Image image, int width, int height) {
 
@@ -46,7 +51,9 @@ public class AndroidSprite extends AndroidGraphics implements Sprite {
         this.canvas = new Canvas(game.getFrameBuffer());
         this.screen = screen;
         this.image = image;
+
         this.matrix = new Matrix();
+        this.collisionMatrix = new Matrix();
 
         this.width = width;
         this.height = height;
@@ -58,9 +65,23 @@ public class AndroidSprite extends AndroidGraphics implements Sprite {
     }
 
     public void paint() {
+
+        canvas.save();
+        canvas.rotate(angle, x + width/2, y + height/2);
+        canvas.drawRect(collisionBox, paint);
+        canvas.restore();
+
+        // rotate rocket
         matrix.setRotate(angle, width / 2, height / 2);
+        // set to position
         matrix.postTranslate(x, y);
-        this.canvas.drawBitmap(((AndroidImage)Assets.rocket).bitmap, matrix, null);
+/*
+        collisionMatrix.setRotate(angle, 300, 800);
+        collisionMatrix.mapRect(collisionBox);
+        collisionMatrix.postTranslate(x, y);
+        */
+
+        canvas.drawBitmap(((AndroidImage)Assets.rocket).bitmap, matrix, null);
     }
 
     // SETTER / GETTER

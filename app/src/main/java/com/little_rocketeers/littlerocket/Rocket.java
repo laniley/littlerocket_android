@@ -2,6 +2,7 @@ package com.little_rocketeers.littlerocket;
 
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 
 import com.little_rocketeers.game_framework.implementation.AndroidGraphics;
 import com.little_rocketeers.game_framework.interfaces.Game;
@@ -47,6 +48,9 @@ public class Rocket extends AndroidSprite{
         else {
             resetToDefaultPosition();
         }
+
+        // left, top, right, bottom
+        collisionBox.set(centerX - (width/2), centerY - (height/5), centerX + (width/2), centerY + (height/4));
     }
 
     public void moveRight() { speedX = MOVESPEED; }
