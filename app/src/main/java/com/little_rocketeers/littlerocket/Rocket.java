@@ -3,6 +3,7 @@ package com.little_rocketeers.littlerocket;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
+import android.graphics.RectF;
 
 import com.little_rocketeers.game_framework.implementation.AndroidGraphics;
 import com.little_rocketeers.game_framework.interfaces.Game;
@@ -26,12 +27,17 @@ public class Rocket extends AndroidSprite{
 
     private int rotation_speed = 5;
 
+    private RectF collisionBoxCenter;
+
 
     public Rocket(Screen screen, Game game, Image image, int width, int height) {
         super(screen, game, image, width, height);
 
         this.setX((screen.getWidth() / 2) - (width / 2));
         this.setY(800);
+
+        collisionBoxCenter = new RectF();
+        collisionBoxes.add(collisionBoxCenter);
     }
 
     public void update() {
@@ -50,7 +56,7 @@ public class Rocket extends AndroidSprite{
         }
 
         // left, top, right, bottom
-        collisionBox.set(centerX - (width/2), centerY - (height/5), centerX + (width/2), centerY + (height/4));
+        collisionBoxCenter.set(centerX - (width/2), centerY - (height/5), centerX + (width/2), centerY + (height/4));
     }
 
     public void moveRight() { speedX = MOVESPEED; }

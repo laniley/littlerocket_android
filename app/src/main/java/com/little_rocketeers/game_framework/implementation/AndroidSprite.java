@@ -4,7 +4,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.RectF;
 
 import com.little_rocketeers.game_framework.interfaces.Game;
@@ -12,6 +11,8 @@ import com.little_rocketeers.game_framework.interfaces.Screen;
 import com.little_rocketeers.game_framework.interfaces.Sprite;
 import com.little_rocketeers.game_framework.interfaces.Image;
 import com.little_rocketeers.littlerocket.Assets;
+
+import java.util.ArrayList;
 
 /**
  * Created by Melanie on 23.07.2016.
@@ -32,11 +33,10 @@ public class AndroidSprite extends AndroidGraphics implements Sprite {
     protected int centerX;
     protected int centerY;
 
-    public RectF collisionBox = new RectF(0,0,0,0);
+    public ArrayList<RectF> collisionBoxes;
 
     protected int angle = 0;
     private Matrix matrix;
-    private Matrix collisionMatrix;
 
     public AndroidSprite(Screen screen, Game game, Image image, int width, int height) {
 
@@ -53,7 +53,7 @@ public class AndroidSprite extends AndroidGraphics implements Sprite {
         this.image = image;
 
         this.matrix = new Matrix();
-        this.collisionMatrix = new Matrix();
+        collisionBoxes = new ArrayList<RectF>();
 
         this.width = width;
         this.height = height;
@@ -66,21 +66,22 @@ public class AndroidSprite extends AndroidGraphics implements Sprite {
 
     public void paint() {
 
+        // COLLISION-BOXES -----------------------------
         canvas.save();
         canvas.rotate(angle, x + width/2, y + height/2);
-        canvas.drawRect(collisionBox, paint);
+
+        for(RectF aCollisionBox: collisionBoxes) {
+            canvas.drawRect(aCollisionBox, paint);
+        }
+
         canvas.restore();
 
+        // ROCKET --------------------------------------
         // rotate rocket
         matrix.setRotate(angle, width / 2, height / 2);
         // set to position
         matrix.postTranslate(x, y);
-/*
-        collisionMatrix.setRotate(angle, 300, 800);
-        collisionMatrix.mapRect(collisionBox);
-        collisionMatrix.postTranslate(x, y);
-        */
-
+        // paint
         canvas.drawBitmap(((AndroidImage)Assets.rocket).bitmap, matrix, null);
     }
 
